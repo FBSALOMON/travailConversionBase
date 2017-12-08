@@ -101,6 +101,22 @@ Representation traduireEntree(char* chaine, int base)
 }
 
 // *****************************************************************************
+// long notrePow(long base, long power)
+//
+// Notre POW
+// *****************************************************************************
+
+long notrePow(long base, long power)
+{
+    long baseLocal = 1;
+
+    for (int i = 0; i < power; i++){
+        baseLocal *= base;
+    }
+    return baseLocal;
+}
+
+// *****************************************************************************
 // Representation decimalABase(int baseCible, long valeurSource)
 //
 // Fabrique une representation pour un nombre de valeur valeurSource et en base
@@ -139,31 +155,32 @@ Representation decimalABase(int base, long valeur)
         
     int count = 0;
     int numberToFind = 0;
+    int lastNumber = 0;
 
     while ( numberToFind <= valeur ) 
     {
-        numberToFind = pow(base, count);
+        numberToFind = notrePow(base, count);
         count += 1;
-        printf("valeur %ld\n",valeur);
-        printf("numberToFind %d\n",numberToFind);
-        printf("COUNT %d\n",count);
-        printf("BASE %d\n",base);
     }
 
-    Representation nb = constructeur (sizeof(valeur), base);
+    int *tmp = (int *) calloc ((count - 1), sizeof(int));
+    int z = 0;
+
+    printf("%d COUNT\n", count);
+
+    for (int i = count; i >= 0; i--) {
+        int rest = valeur % notrePow(base, i - 1);
+        int mult = (int) valeur / notrePow(base, i - 1);
+        tmp[z] = mult;
+        z++;
+        printf("%d \n", mult);
+    }
+
+    Representation nb = constructeur (sizeof(tmp), base);
   
+    nb.nombre = tmp;
+
     return nb;
-}
-
-long notrePow(long base, long power)
-{
-    long baseLocal = 1;
-
-    for (int i = 0; i < power; i++){
-        baseLocal *= base;
-    }
-    printf(" %ld saida\n", baseLocal);
-    return baseLocal;
 }
 
 // *****************************************************************************
@@ -209,44 +226,7 @@ long baseADecimal(Representation* nb)
 
     for (int i = 0; i < nb->taille; i++)
         newNumber += number[i] * notrePow(nb->base, (nb->taille - 1 - i));
-    printf("%d AAAaaaaAAa\n", newNumber );
     return newNumber;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 

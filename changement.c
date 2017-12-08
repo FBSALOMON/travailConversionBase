@@ -25,7 +25,7 @@ void printNombre(Representation * nb)
 {
     for (int i = 0 ; i < nb->taille; i++)
     {
-	printf("%c", SYMBOLES[nb->nombre[i]]);
+		printf("%c", SYMBOLES[nb->nombre[i]]);
     }
     printf("\n");
 }
@@ -62,12 +62,12 @@ int main()
 		long d = baseADecimal(&nb);
 		free(nb.nombre);
 		
-		/*Representation n = decimalABase(2, d);
+		Representation n = decimalABase(2, d);
 		printf ("     Ada (base 2) : ");
 		printNombre(&n);
 		free(n.nombre);
 
-		n = decimalABase(8, d);
+		/*n = decimalABase(8, d);
 		printf ("  Donald (base 8) : ");
 		printNombre(&n);
 		free(n.nombre);
@@ -81,9 +81,9 @@ int main()
 		printf ("Kidinnu (base 60) : ");
 		printNombre(&n);
 		free(n.nombre);
-		
+		*/
 		printf("\nQuelle est la base?\n");
-		scanf("%d", &base);*/
+		scanf("%d", &base);
     }
 
     printf("Bye\n");
