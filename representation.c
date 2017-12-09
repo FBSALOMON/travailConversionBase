@@ -168,9 +168,11 @@ Representation decimalABase(int base, long valeur)
 
     printf("%d COUNT\n", count);
 
-    for (int i = count; i >= 0; i--) {
-        int rest = valeur % notrePow(base, i - 1);
-        int mult = (int) valeur / notrePow(base, i - 1);
+    int rest = valeur;
+
+    for (int i = count; i >= 0; i--) {      
+        rest = rest % notrePow(base, i - 1);  
+        int mult = valeur / notrePow(base, i - 1);
         tmp[z] = mult;
         z++;
         printf("%d \n", mult);
